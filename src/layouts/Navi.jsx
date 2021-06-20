@@ -1,12 +1,12 @@
 import React from "react";
-import { Button, Container,Dropdown, Menu } from "semantic-ui-react";
+import { Button, Dropdown, Container, Menu } from "semantic-ui-react";
 import SignIn from "./SignIn";
 import SignInForEmployer from "./SignInForEmployer";
 
 export default function Navi() {
   return (
     <div>
-      <Menu inverted fixed>
+      <Menu inverted fixed="top">
         <Container>
           <Menu.Item name="home" />
           <Menu.Item name="messages" />
@@ -14,8 +14,9 @@ export default function Navi() {
           <Menu.Menu position="right">
             <Dropdown item text="Giriş Yap">
               <Dropdown.Menu>
-                <Dropdown.Item>Üye Girişi</Dropdown.Item>
-                <Dropdown.Item>İş Veren Girişi</Dropdown.Item>
+                <Dropdown.Item><SignIn /></Dropdown.Item>
+                <Dropdown.Item><SignInForEmployer /></Dropdown.Item>
+                
               </Dropdown.Menu>
             </Dropdown>
 
