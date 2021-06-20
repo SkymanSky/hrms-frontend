@@ -1,3 +1,6 @@
+##Hrms react component diagram
+
+<img src="https://github.com/SkymanSky/hrms-frontend/blob/master/public/hrms-frontend%20component%20diagram.png">
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
