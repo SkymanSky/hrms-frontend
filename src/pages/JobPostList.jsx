@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Icon, Label, Menu, Table } from "semantic-ui-react";
+import { Icon, Menu, Table, Divider, Header } from "semantic-ui-react";
 import JobPostService from "../services/jobPostService";
 
 export default function JobPostList() {
   const [jobPosts, setJobPosts] = useState([]);
 
-  useEffect(()=>{
-    let jobPostService = new JobPostService()
-    jobPostService.getJobPosts().then(result=>setJobPosts(result.data.data))
-  },[])
+  useEffect(() => {
+    let jobPostService = new JobPostService();
+    jobPostService
+      .getJobPosts()
+      .then((result) => setJobPosts(result.data.data));
+  }, []);
 
   return (
     <div>
+      <Divider horizontal>
+        <Header as="h4">
+          <Icon name="list" />
+          Aktif İş İlanları
+        </Header>
+      </Divider>
       <Table celled>
         <Table.Header>
           <Table.Row>
@@ -56,7 +64,6 @@ export default function JobPostList() {
           </Table.Row>
         </Table.Footer>
       </Table>
-      
     </div>
   );
 }

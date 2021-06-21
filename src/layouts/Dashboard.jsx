@@ -1,19 +1,22 @@
 import React from "react";
-import Navi from "./Navi";
 import Positions from "./Positions";
+import Employer from "../pages/Employer";
 import JobPostList from "../pages/JobPostList";
-import { Button, Grid, Icon, Label } from "semantic-ui-react";
+import JobSeekerList from "../pages/JobSeekerList";
+import { Grid } from "semantic-ui-react";
 
 export default function Dashboard() {
   return (
     <div>
       <Grid>
         <Grid.Row>
-          <Grid.Column width={4}>
+          <Grid.Column width={4} className="main">
             <Positions />
+            <Employer />
           </Grid.Column>
           <Grid.Column width={12}>
             <JobPostList />
+            <JobSeekerList />
           </Grid.Column>
         </Grid.Row>
       </Grid>
