@@ -1,29 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { Icon, Menu, Table, Divider, Header,Button,Label } from "semantic-ui-react";
+import { Icon, Menu, Table, Divider, Header,Label } from "semantic-ui-react";
 import JobPostService from "../services/jobPostService";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 
-export default function JobPostList() {
-  const [jobPosts, setJobPosts] = useState([]);
-  
+export default function JobPostListAsc() {
+  const [jobPostsAsc, setJobPostsAsc] = useState([]);
+
   useEffect(() => {
     let jobPostService = new JobPostService();
     jobPostService
-      .getJobPosts()
-      .then((result) => setJobPosts(result.data.data));
+      .getJobPostsAsc()
+      .then((result) => setJobPostsAsc(result.data.data));
   }, []);
 
   return (
     <div>
       <Divider horizontal>
         <Header as="h4">
+          
           <Icon name="list" />
           Aktif İş İlanları
+          
         </Header>
-        <Label size="large" color="green">Tarihe Göre Sırala:</Label>
+        <Label size="large" color="green">
+            Tarihe Göre Sırala:
+          </Label>
         <Link to={`/jobpostsasc/`}>Önce Eski |</Link>
-        <Link to={`/jobpostsasc/`}> Önce Yeni</Link>
+        <Link to={`/jobpostsdesc/`}> Önce Yeni</Link>
       </Divider>
       <Table celled>
         <Table.Header>
@@ -38,14 +42,24 @@ export default function JobPostList() {
         </Table.Header>
 
         <Table.Body>
-          {jobPosts.map((jobPost) => (
-            <Table.Row key={jobPost.id}>
-              <Table.Cell>{jobPost.position.positionName}</Table.Cell>
-              <Table.Cell>{jobPost.jobDescription}</Table.Cell>
-              <Table.Cell>{jobPost.openPositionQuantity}</Table.Cell>
-              <Table.Cell>{format(new Date(jobPost.applicationDeadline.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
-              <Table.Cell>{format(new Date(jobPost.jobPostDate.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
-              <Table.Cell>{jobPost.employer.companyName}</Table.Cell>
+          {jobPostsAsc.map((jobPostAsc) => (
+            <Table.Row key={jobPostAsc.id}>
+              <Table.Cell>{jobPostAsc.position.positionName}</Table.Cell>
+              <Table.Cell>{jobPostAsc.jobDescription}</Table.Cell>
+              <Table.Cell>{jobPostAsc.openPositionQuantity}</Table.Cell>
+              <Table.Cell>
+                {format(
+                  new Date(jobPostAsc.applicationDeadline.replace("T", " ")),
+                  "dd.MM.yyyy"
+                )}
+              </Table.Cell>
+              <Table.Cell>
+                {format(
+                  new Date(jobPostAsc.jobPostDate.replace("T", " ")),
+                  "dd.MM.yyyy"
+                )}
+              </Table.Cell>
+              <Table.Cell>{jobPostAsc.employer.companyName}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

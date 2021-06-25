@@ -8,7 +8,7 @@ export default function Navi() {
     <div>
       <Menu inverted fixed="top">
         <Container>
-          <Menu.Item name="home" />
+          <Menu.Item name="Anasayfa"/>
           <Menu.Item name="messages" />
 
           <Menu.Menu position="right">
