@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect } from 'react';
+import { useParams } from 'react-router';
+import JobPostService from '../services/jobPostService';
 import { Icon, Menu, Table, Divider, Header,Label } from "semantic-ui-react";
-import JobPostService from "../services/jobPostService";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 
-export default function JobPostList() {
-  const [jobPosts, setJobPosts] = useState([]);
-  
-  useEffect(() => {
-    let jobPostService = new JobPostService();
-    jobPostService
-      .getJobPosts()
-      .then((result) => setJobPosts(result.data.data));
-  }, []);
 
-  return (
-    <div>
-      <Divider horizontal>
+export default function JobPostListByCompany() {
+    let {userId} = useParams();
+    const [jobPostListByCompanies, setjobPostListByCompanies] = useState([])
+
+    useEffect(() => {
+        let jobPostService= new JobPostService()
+        jobPostService.getJobPostsByCompany(userId).then((result)=>setjobPostListByCompanies(result.data.data))
+    }, [])
+    return (
+        <div>
+            <Divider horizontal>
         <Header as="h4">
           <Icon name="list" />
           Aktif İş İlanları
@@ -38,14 +38,14 @@ export default function JobPostList() {
         </Table.Header>
 
         <Table.Body>
-          {jobPosts.map((jobPost) => (
-            <Table.Row key={jobPost.id}>
-              <Table.Cell>{jobPost.position.positionName}</Table.Cell>
-              <Table.Cell>{jobPost.jobDescription}</Table.Cell>
-              <Table.Cell>{jobPost.openPositionQuantity}</Table.Cell>
-              <Table.Cell>{format(new Date(jobPost.applicationDeadline.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
-              <Table.Cell>{format(new Date(jobPost.jobPostDate.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
-              <Table.Cell>{jobPost.employer.companyName}</Table.Cell>
+          {jobPostListByCompanies.map((jobPostListByCompany) => (
+            <Table.Row key={jobPostListByCompany.id}>
+              <Table.Cell>{jobPostListByCompany.position.positionName}</Table.Cell>
+              <Table.Cell>{jobPostListByCompany.jobDescription}</Table.Cell>
+              <Table.Cell>{jobPostListByCompany.openPositionQuantity}</Table.Cell>
+              <Table.Cell>{format(new Date(jobPostListByCompany.applicationDeadline.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
+              <Table.Cell>{format(new Date(jobPostListByCompany.jobPostDate.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
+              <Table.Cell>{jobPostListByCompany.employer.companyName}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
@@ -69,6 +69,6 @@ export default function JobPostList() {
           </Table.Row>
         </Table.Footer>
       </Table>
-    </div>
-  );
+        </div>
+    )
 }

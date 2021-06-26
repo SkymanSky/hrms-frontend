@@ -7,6 +7,7 @@ import JobPostListDesc from "../pages/JobPostListDesc";
 import JobSeekerList from "../pages/JobSeekerList";
 import { Grid } from "semantic-ui-react";
 import { Route } from "react-router";
+import JobPostListByCompany from "../pages/JobPostListByCompany";
 
 export default function Dashboard() {
   return (
@@ -22,6 +23,7 @@ export default function Dashboard() {
           <Route exact path="/" component={JobSeekerList } /> 
           <Route exact path="/jobpostsasc" component={JobPostListAsc } />
           <Route exact path="/jobpostsdesc" component={JobPostListDesc } />
+          <Route path="/jobposts/:userId" component={JobPostListByCompany} />
           </Grid.Column>
         </Grid.Row>
       </Grid>

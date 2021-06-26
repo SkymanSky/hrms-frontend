@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from "react";
 import EmployerService from "../services/employerService";
 import { Menu, Header,Segment, Divider } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 export default function Employer() {
   const [employers, setEmployers] = useState([]);
@@ -21,7 +22,9 @@ export default function Employer() {
       </Segment>
       <Menu pointing vertical>
         {employers.map((employer) => (
-          <Menu.Item key={employer.id} name={employer.companyName} />
+          <Menu.Item key={employer.id} name={employer.companyName} >
+            <Link to={`/jobPosts/${employer.id}`}>{employer.companyName}</Link>
+            </Menu.Item>
         ))}
       </Menu>
     </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button, Dropdown, Container, Menu } from "semantic-ui-react";
 import SignIn from "./SignIn";
 import SignInForEmployer from "./SignInForEmployer";
@@ -8,7 +9,8 @@ export default function Navi() {
     <div>
       <Menu inverted fixed="top">
         <Container>
-          <Menu.Item name="Anasayfa"/>
+          <Menu.Item name="Anasayfa"><Link to="/">Anasayfa</Link></Menu.Item>
+            
           <Menu.Item name="messages" />
 
           <Menu.Menu position="right">

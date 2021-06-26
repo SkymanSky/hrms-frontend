@@ -12,4 +12,8 @@ export default class jobPostService{
     getJobPostsDesc(){
         return axios.get("http://localhost:8080/api/jobpositions/getalldesc")
     }
+
+    getJobPostsByCompany(userId){
+        return axios.get("http://localhost:8080/api/jobpositions/getbyuseridstatusactive?userId="+userId)
+    }
 }
