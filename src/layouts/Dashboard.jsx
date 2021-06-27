@@ -5,9 +5,11 @@ import JobPostList from "../pages/JobPostList";
 import JobPostListAsc from "../pages/JobPostListAsc";
 import JobPostListDesc from "../pages/JobPostListDesc";
 import JobSeekerList from "../pages/JobSeekerList";
-import { Grid } from "semantic-ui-react";
+import CurriculumVitae from "../pages/CurriculumVitae";
+import { Grid, GridColumn } from "semantic-ui-react";
 import { Route } from "react-router";
 import JobPostListByCompany from "../pages/JobPostListByCompany";
+import Cv from "./Cv";
 
 export default function Dashboard() {
   return (
@@ -18,12 +20,14 @@ export default function Dashboard() {
             <Positions />
             <Employer />
           </Grid.Column>
-          <Grid.Column width={12}>
-          <Route exact path="/" component={JobPostList } />
-          <Route exact path="/" component={JobSeekerList } /> 
-          <Route exact path="/jobpostsasc" component={JobPostListAsc } />
-          <Route exact path="/jobpostsdesc" component={JobPostListDesc } />
-          <Route path="/jobposts/:userId" component={JobPostListByCompany} />
+          <Grid.Column width={12} className="main">
+            <Route exact path="/" component={JobPostList} />
+            <Route exact path="/" component={JobSeekerList} />
+            <Route path="/jobpostsasc" component={JobPostListAsc} />
+            <Route path="/jobpostsdesc" component={JobPostListDesc} />
+            <Route path="/jobposts/:userId" component={JobPostListByCompany} />
+            {/* <Route path="/cv/:jobSeekerId" component={CurriculumVitae} /> */}
+            <Route path="/cv/:jobSeekerId" component={Cv} />
           </Grid.Column>
         </Grid.Row>
       </Grid>
