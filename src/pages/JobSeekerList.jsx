@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import React, { useState, useEffect } from "react";
 import { Table, Icon,Divider,Header } from "semantic-ui-react";
 import JobSeekerListService from "../services/jobSeekerListService";
+import { Link } from "react-router-dom";
 
 export default function JobSeekerList() {
   const [jobSeekers, setjobSeekers] = useState([]);
@@ -31,7 +32,7 @@ export default function JobSeekerList() {
         <Table.Body>
           {jobSeekers.map((jobSeeker) => (
             <Table.Row key={jobSeeker.id}>
-              <Table.Cell>{jobSeeker.firstName}</Table.Cell>
+              <Table.Cell><Link to={`/cv/${jobSeeker.userId}`}>{jobSeeker.firstName}</Link></Table.Cell>
               <Table.Cell>{jobSeeker.lastName}</Table.Cell>
               <Table.Cell>{format(new Date(jobSeeker.birthDate.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
               <Table.Cell>{jobSeeker.email}</Table.Cell>
