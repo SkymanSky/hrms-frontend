@@ -8,4 +8,9 @@ export default class jobSeekerListService{
     getJobSeekerById(jobSeekerId){
         return axios.get("http://localhost:8080/api/jobseekers/findbyid?userId="+jobSeekerId)
     }
+
+    addJobSeeker(jobSeeker){
+        let result = axios.post("http://localhost:8080/api/jobseekers/add",jobSeeker)
+        return result
+    }
 }
