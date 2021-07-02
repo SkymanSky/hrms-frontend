@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { Icon, Menu, Table, Divider, Header,Label,Button } from "semantic-ui-react";
 import JobPostService from "../services/jobPostService";
-import { Icon, Menu, Table, Divider, Header } from "semantic-ui-react";
 import { format } from "date-fns";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
-export default function JobPostListByCompany() {
-  let { userId } = useParams();
-  const [jobPostListByCompanies, setjobPostListByCompanies] = useState([]);
-
+export default function JobPostList() {
+  const [jobPosts, setJobPosts] = useState([]);
+  
   useEffect(() => {
     let jobPostService = new JobPostService();
     jobPostService
-      .getJobPostsByCompany(userId)
-      .then((result) => setjobPostListByCompanies(result.data.data));
+      .getJobPostsForActivation()
+      .then((result) => setJobPosts(result.data.data));
   }, []);
+
+  const handleApprove = (jobPost) => {
+    let jobPostService = new JobPostService();
+    jobPostService.jobPostChangeStatus(jobPost).then()
+    toast.success(`${jobPost.id} deaktive edildi!`)
+  };
+
   return (
     <div>
       <Divider horizontal>
@@ -21,6 +28,9 @@ export default function JobPostListByCompany() {
           <Icon name="list" />
           Aktif İş İlanları
         </Header>
+        <Label size="large" color="green">Tarihe Göre Sırala:</Label>
+        <Link to={`/jobpostsasc/`}>Önce Eski |</Link>
+        <Link to={`/jobpostsasc/`}> Önce Yeni</Link>
       </Divider>
       <Table celled>
         <Table.Header>
@@ -35,32 +45,15 @@ export default function JobPostListByCompany() {
         </Table.Header>
 
         <Table.Body>
-          {jobPostListByCompanies.map((jobPostListByCompany) => (
-            <Table.Row key={jobPostListByCompany.id}>
-              <Table.Cell>
-                {jobPostListByCompany.position.positionName}
-              </Table.Cell>
-              <Table.Cell>{jobPostListByCompany.jobDescription}</Table.Cell>
-              <Table.Cell>
-                {jobPostListByCompany.openPositionQuantity}
-              </Table.Cell>
-              <Table.Cell>
-                {format(
-                  new Date(
-                    jobPostListByCompany.applicationDeadline.replace("T", " ")
-                  ),
-                  "dd.MM.yyyy"
-                )}
-              </Table.Cell>
-              <Table.Cell>
-                {format(
-                  new Date(jobPostListByCompany.jobPostDate.replace("T", " ")),
-                  "dd.MM.yyyy"
-                )}
-              </Table.Cell>
-              <Table.Cell>
-                {jobPostListByCompany.employer.companyName}
-              </Table.Cell>
+          {jobPosts.map((jobPost) => (
+            <Table.Row key={jobPost.id}>
+              <Table.Cell>{jobPost.position.positionName}</Table.Cell>
+              <Table.Cell>{jobPost.jobDescription}</Table.Cell>
+              <Table.Cell>{jobPost.openPositionQuantity}</Table.Cell>
+              <Table.Cell>{format(new Date(jobPost.applicationDeadline.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
+              <Table.Cell>{format(new Date(jobPost.jobPostDate.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
+              <Table.Cell>{jobPost.employer.companyName}</Table.Cell>
+              <Table.Cell><Button onClick={()=>handleApprove(jobPost)} >Deaktif Et</Button></Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

@@ -26,6 +26,7 @@ export default function JobSeekerList() {
             <Table.HeaderCell>Soyadı </Table.HeaderCell>
             <Table.HeaderCell>Doğum Tarihi </Table.HeaderCell>
             <Table.HeaderCell>Email </Table.HeaderCell>
+            <Table.HeaderCell>Detaylar </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -36,6 +37,7 @@ export default function JobSeekerList() {
               <Table.Cell>{jobSeeker.lastName}</Table.Cell>
               <Table.Cell>{format(new Date(jobSeeker.birthDate.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
               <Table.Cell>{jobSeeker.email}</Table.Cell>
+              <Table.Cell><Link to={`/cv/${jobSeeker.userId}`}><u>Detaylı CV</u></Link></Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

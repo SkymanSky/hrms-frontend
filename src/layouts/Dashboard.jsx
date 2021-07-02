@@ -5,15 +5,18 @@ import JobPostList from "../pages/JobPostList";
 import JobPostListAsc from "../pages/JobPostListAsc";
 import JobPostListDesc from "../pages/JobPostListDesc";
 import JobSeekerList from "../pages/JobSeekerList";
-import CurriculumVitae from "../pages/CurriculumVitae";
-import { Grid, GridColumn } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { Route } from "react-router";
 import JobPostListByCompany from "../pages/JobPostListByCompany";
 import Cv from "./Cv";
+import JobPostAdd from "../pages/JobPostAdd";
+import JobPostChangeStatus from "../pages/JobPostChangeStatus";
+import { ToastContainer } from "react-toastify";
 
 export default function Dashboard() {
   return (
     <div>
+      <ToastContainer position="bottom-right" />
       <Grid>
         <Grid.Row>
           <Grid.Column width={4} className="main">
@@ -26,8 +29,9 @@ export default function Dashboard() {
             <Route path="/jobpostsasc" component={JobPostListAsc} />
             <Route path="/jobpostsdesc" component={JobPostListDesc} />
             <Route path="/jobposts/:userId" component={JobPostListByCompany} />
-            {/* <Route path="/cv/:jobSeekerId" component={CurriculumVitae} /> */}
             <Route path="/cv/:jobSeekerId" component={Cv} />
+            <Route path="/addjobposts/add" component={JobPostAdd} />
+            <Route path="/jobPostChangeStatus" component={JobPostChangeStatus} />
           </Grid.Column>
         </Grid.Row>
       </Grid>

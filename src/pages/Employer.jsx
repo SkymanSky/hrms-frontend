@@ -22,7 +22,7 @@ export default function Employer() {
       </Segment>
       <Menu pointing vertical>
         {employers.map((employer) => (
-          <Menu.Item >
+          <Menu.Item key={employer.id}>
             <Link to={`/jobPosts/${employer.id}`}>{employer.companyName}</Link>
             </Menu.Item>
         ))}
