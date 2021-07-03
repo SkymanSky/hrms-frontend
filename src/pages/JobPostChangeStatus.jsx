@@ -17,8 +17,14 @@ export default function JobPostList() {
 
   const handleApprove = (jobPost) => {
     let jobPostService = new JobPostService();
-    jobPostService.jobPostChangeStatus(jobPost).then()
-    toast.success(`${jobPost.id} deaktive edildi!`)
+    jobPostService.jobPostChangeStatusToActive(jobPost).then()
+    toast.success(`${jobPost.id} aktive edildi!`)
+  };
+
+  const handleReject = (jobPost) => {
+    let jobPostService = new JobPostService();
+    jobPostService.jobPostChangeStatusToInActive(jobPost).then()
+    toast.warn(`${jobPost.id} deaktive edildi!`)
   };
 
   return (
@@ -35,25 +41,30 @@ export default function JobPostList() {
       <Table celled>
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell>İlan No</Table.HeaderCell>
             <Table.HeaderCell>Pozisyon</Table.HeaderCell>
             <Table.HeaderCell>İş Tanımı</Table.HeaderCell>
             <Table.HeaderCell>Açık Pozisyon</Table.HeaderCell>
             <Table.HeaderCell>Son Başvuru Tarihi</Table.HeaderCell>
             <Table.HeaderCell>İlan Tarihi</Table.HeaderCell>
             <Table.HeaderCell>Şirket İsmi</Table.HeaderCell>
+            <Table.HeaderCell>Durum</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
           {jobPosts.map((jobPost) => (
             <Table.Row key={jobPost.id}>
+              <Table.Cell>{jobPost.id}</Table.Cell>
               <Table.Cell>{jobPost.position.positionName}</Table.Cell>
               <Table.Cell>{jobPost.jobDescription}</Table.Cell>
               <Table.Cell>{jobPost.openPositionQuantity}</Table.Cell>
               <Table.Cell>{format(new Date(jobPost.applicationDeadline.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
               <Table.Cell>{format(new Date(jobPost.jobPostDate.replace("T", " ")),"dd.MM.yyyy")}</Table.Cell>
               <Table.Cell>{jobPost.employer.companyName}</Table.Cell>
-              <Table.Cell><Button onClick={()=>handleApprove(jobPost)} >Deaktif Et</Button></Table.Cell>
+              <Table.Cell>{jobPost.jobPostingStatus.toString()}</Table.Cell>
+              <Table.Cell><Button size="small" color="green" onClick={()=>handleApprove(jobPost)} >Aktif Et</Button></Table.Cell>
+              <Table.Cell><Button size="small"color="red" onClick={()=>handleReject(jobPost)} >Deaktif Et</Button></Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

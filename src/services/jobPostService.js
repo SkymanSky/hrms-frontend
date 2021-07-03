@@ -26,8 +26,13 @@ export default class jobPostService{
         return result
     }
 
-    jobPostChangeStatus(jobPost){
+    jobPostChangeStatusToInActive(jobPost){
         let result = axios.post("http://localhost:8080/api/jobpositions/updateJobPostingStatusToInactive?id="+jobPost.id)
+        return result
+    }
+
+    jobPostChangeStatusToActive(jobPost){
+        let result = axios.post("http://localhost:8080/api/jobpositions/updateJobPostingStatusToACtive?id="+jobPost.id)
         return result
     }
 }
