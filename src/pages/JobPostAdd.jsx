@@ -53,14 +53,8 @@ export default function JobPostAdd() {
       <Form className="ui form">
         <KodlamaIoTextInput name="position.id" placeholder="Pozisyon Id" />
         <KodlamaIoTextInput name="jobDescription" placeholder="İş Tanımı" />
-        <KodlamaIoTextInput
-          name="openPositionQuantity"
-          placeholder="Açık Pozisyon"
-        />
-        <KodlamaIoTextInput
-          name="applicationDeadline"
-          placeholder="Son Başvuru Tarihi"
-        />
+        <KodlamaIoTextInput name="openPositionQuantity" placeholder="Açık Pozisyon"/>
+        <KodlamaIoTextInput name="applicationDeadline"placeholder="Son Başvuru Tarihi"/>
         <KodlamaIoTextInput name="jobPostDate" placeholder="İlan Tarihi" />
         <KodlamaIoTextInput name="employer.id" placeholder="Şirket Id" />
         <KodlamaIoTextInput name="cityId" placeholder="Şehir Id" />

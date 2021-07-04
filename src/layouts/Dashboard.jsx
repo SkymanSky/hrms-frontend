@@ -12,6 +12,7 @@ import Cv from "./Cv";
 import JobPostAdd from "../pages/JobPostAdd";
 import JobPostChangeStatus from "../pages/JobPostChangeStatus";
 import { ToastContainer } from "react-toastify";
+import CurriculumViteaUpdate from "../pages/CurriculumViteaUpdate";
 
 export default function Dashboard() {
   return (
@@ -32,6 +33,7 @@ export default function Dashboard() {
             <Route path="/cv/:jobSeekerId" component={Cv} />
             <Route path="/addjobposts/add" component={JobPostAdd} />
             <Route path="/jobPostChangeStatus" component={JobPostChangeStatus} />
+            <Route exact path="/cv-update/:jobSeekerId" component={CurriculumViteaUpdate} />
           </Grid.Column>
         </Grid.Row>
       </Grid>

@@ -19,8 +19,6 @@ export default function Cv() {
     <div>
       {curriculumVitaes.map((curriculumVitae) => (
         <Segment>
-          
-
           <Header as="h3">Ön Yazı</Header>
           <Container>
             <p>{curriculumVitae.coverLetter}</p>
@@ -44,17 +42,19 @@ export default function Cv() {
           <Divider section />
 
           <Header as="h3">İş Deneyimleri</Header>
-          {curriculumVitae.jobSeekerCvExperiences.map((jobSeekerCvExperience) => (
-            <p>
-              {jobSeekerCvExperience.companyName +
-                " " +
-                jobSeekerCvExperience.positionDescription +
-                " " +
-                jobSeekerCvExperience.startYearExperience +
-                " " +
-                jobSeekerCvExperience.endYearExperience}
-            </p>
-          ))}
+          {curriculumVitae.jobSeekerCvExperiences.map(
+            (jobSeekerCvExperience) => (
+              <p>
+                {jobSeekerCvExperience.companyName +
+                  " " +
+                  jobSeekerCvExperience.positionDescription +
+                  " " +
+                  jobSeekerCvExperience.startYearExperience +
+                  " " +
+                  jobSeekerCvExperience.endYearExperience}
+              </p>
+            )
+          )}
           <Divider section />
 
           <Header as="h3">Yabancı Dil</Header>
@@ -70,8 +70,8 @@ export default function Cv() {
           <Divider section />
 
           <Header as="h3">Sosyal Medya</Header>
-                <p>{curriculumVitae.githubProfile}</p>
-                <p>{curriculumVitae.linkedinProfile}</p>
+          <p>{curriculumVitae.githubProfile}</p>
+          <p>{curriculumVitae.linkedinProfile}</p>
           <Divider section />
 
           <Header as="h3">Yetenekler</Header>
